@@ -9,9 +9,9 @@ const cloudinary = require("cloudinary").v2;
 const fileUpload = require("express-fileupload");
 
 cloudinary.config({
-  cloud_name: "dtehfyg8j",
-  api_key: "476757582494464",
-  api_secret: "1FPARzDqLPWC3DDavelB09eALVw",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 const convertToBase64 = (file) => {
