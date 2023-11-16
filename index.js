@@ -6,9 +6,7 @@ require("dotenv").config(); // Pour pouvoir utiliser un ficher .env et récupér
 const app = express();
 app.use(express.json());
 
-mongoose.connect(
-  `mongodb+srv://${process.env.MONGOOSE_USR}:${process.env.MONGOOSE_PWD}@cluster0.fo874zg.mongodb.net/`
-);
+mongoose.connect(process.env.MONGOOSE_URL);
 
 const userRoute = require("./routes/user");
 const offerRoute = require("./routes/offer");
