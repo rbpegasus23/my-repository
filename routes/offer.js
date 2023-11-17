@@ -1,7 +1,6 @@
 const express = require("express");
 const User = require("../models/User");
 const Offer = require("../models/Offer");
-const jwt = require("jsonwebtoken");
 const router = express.Router();
 const cloudinary = require("cloudinary").v2;
 const fileUpload = require("express-fileupload");

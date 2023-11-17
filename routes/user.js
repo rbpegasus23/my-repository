@@ -3,7 +3,6 @@ const User = require("../models/User");
 const SHA256 = require("crypto-js/sha256");
 const uid2 = require("uid2");
 const encBase64 = require("crypto-js/enc-base64");
-const jwt = require("jsonwebtoken");
 const router = express.Router();
 const cloudinary = require("cloudinary").v2;
 const fileUpload = require("express-fileupload");
@@ -75,28 +74,6 @@ router.post("/login", async (req, res) => {
     res.json({
       message: "We cannot verifiy your password, please retry later",
     });
-  }
-});
-
-const isAuthenticate = (req, res, next) => {
-  const authUser = req.headers.authorization;
-  console.log(authUser);
-  const token = authUser.split(" ")[1];
-  jwt.verify(token, process.env.SECRET_ACCESS, (err, userAuthorized) => {
-    // Ici userAuthorized est le payload décodé
-    if (err) {
-      return res.json({ message: "You are not authorized" });
-    }
-    req.userAuthorized = userAuthorized;
-    console.log(req.userAuthorized);
-    next();
-  });
-};
-router.get("/recup", isAuthenticate, async (req, res) => {
-  const userSearched = await User.findOne({ email: req.userAuthorized.name });
-  console.log(userSearched);
-  if (userSearched) {
-    res.json(userSearched);
   }
 });
 
